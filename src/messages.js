@@ -74,7 +74,8 @@ var errors = {
   E056: "'{a}' was used before it was declared, which is illegal for '{b}' variables.",
   E057: "Invalid meta property: '{a}.{b}'.",
   E058: "Missing semicolon.",
-  E059: "Incompatible values for the '{a}' and '{b}' linting options."
+  E059: "Incompatible values for the '{a}' and '{b}' linting options.",
+  E060: "Type annotations are not available in standard ECMA script (use es4type option)."
 };
 
 var warnings = {

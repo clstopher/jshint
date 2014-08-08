@@ -540,6 +540,12 @@ exports.bool = {
     expr        : true,
 
     /**
+     * This option suppresses warnings about the use of type annotations
+     * based on the abandoned ES4 specification.
+     */
+    es4type     : true,
+
+    /**
      * This option tells JSHint that your code uses ECMAScript 6 specific
      * syntax. Note that these features are not finalized yet and not all
      * browsers implement them.

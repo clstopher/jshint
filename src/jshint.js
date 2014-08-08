@@ -1571,6 +1571,17 @@ var JSHINT = (function() {
     }
   }
 
+  function typeannotation() {
+    var i = optionalidentifier();
+    if (i) {
+      while (state.tokens.next.id === ".") {
+        advance(".");
+        i = optionalidentifier();
+      }
+      return i;
+    }
+    error("E030", state.tokens.next, state.tokens.next.value);
+  }
 
   function reachable(controlToken) {
     var i = 0, t;
@@ -2900,6 +2911,13 @@ var JSHINT = (function() {
           error("W138", state.tokens.current);
         }
       }
+      if (state.tokens.next.id === ":") {
+        if (!state.option.es4type) {
+          error("E060");
+        }
+        advance(":");
+        typeannotation();
+      }
       if (state.tokens.next.id === "=") {
         if (!state.inES6()) {
           warning("W119", state.tokens.next, "default parameters", "6");
@@ -3085,6 +3103,14 @@ var JSHINT = (function() {
       state.funct["(metrics)"].verifyMaxParametersPerFunction();
     } else {
       state.funct["(metrics)"].arity = 0;
+    }
+
+    if (state.tokens.next.id === ":") {
+      if (!state.option.es4type) {
+        error("E060");
+      }
+      advance(":");
+      typeannotation();
     }
 
     if (isArrow) {
@@ -3658,6 +3684,14 @@ var JSHINT = (function() {
       }
 
       this.first = this.first.concat(names);
+
+      if (state.tokens.next.id === ":") {
+        if (!state.option.es4type) {
+          error("E060");
+        }
+        advance(":");
+        typeannotation();
+      }
 
       for (var t in tokens) {
         if (tokens.hasOwnProperty(t)) {
@@ -4269,6 +4303,13 @@ var JSHINT = (function() {
       if (state.tokens.next.id === "var") {
         advance("var");
         state.tokens.curr.fud({ prefix: true });
+        if (state.tokens.next.id === ":") {
+          if (!state.option.es4type) {
+            error("E060");
+          }
+          advance(":");
+          typeannotation();
+        }
       } else if (state.tokens.next.id === "let" || state.tokens.next.id === "const") {
         advance(state.tokens.next.id);
         // create a new block scope
@@ -4331,6 +4372,13 @@ var JSHINT = (function() {
         if (state.tokens.next.id === "var") {
           advance("var");
           state.tokens.curr.fud();
+          if (state.tokens.next.id === ":") {
+            if (!state.option.es4type) {
+              error("E060");
+            }
+            advance(":");
+            typeannotation();
+          }
         } else if (state.tokens.next.id === "let") {
           advance("let");
           // create a new block scope
