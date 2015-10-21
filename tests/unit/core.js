@@ -2023,10 +2023,13 @@ exports.testES4TypeSpecifiersAllowed = function (test) {
   var code4 = "function something(i : Number) { return 1; }";
   var code5 = "for (var i : Number = 0; i < 3; i++) { }";
   var code6 = "for each (var i : Number in [1, 3, 5, 7]) { }";
+  var code7 = "function something() : void { return; }";
   TestRun(test).test(code1, { es4type: true });
   TestRun(test).test(code2, { es4type: true });
   TestRun(test).test(code3, { es4type: true });
   TestRun(test).test(code4, { es4type: true });
   TestRun(test).test(code5, { es4type: true });
+  TestRun(test).test(code6, { es4type: true, moz: true });
+  TestRun(test).test(code7, { es4type: true });
   test.done();
 }

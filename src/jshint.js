@@ -1572,15 +1572,21 @@ var JSHINT = (function() {
   }
 
   function typeannotation() {
-    var i = optionalidentifier();
-    if (i) {
-      while (state.tokens.next.id === ".") {
-        advance(".");
-        i = optionalidentifier();
-      }
-      return i;
+    if (!state.tokens.next.identifier) {
+      error("E030", state.tokens.next, state.tokens.next.value);
+      return;
     }
-    error("E030", state.tokens.next, state.tokens.next.value);
+
+    advance();
+
+    while (state.tokens.next.id === ".") {
+      advance(".");
+      if (state.tokens.next.identifier) {
+        advance();
+      } else {
+        error("E030", state.tokens.next, state.tokens.next.value);
+      }
+    }
   }
 
   function reachable(controlToken) {
