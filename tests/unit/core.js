@@ -1997,11 +1997,22 @@ exports.testES4TypeSpecifierErrorsByDefault = function (test) {
   var code4 = "function something(i : Number) { return 1; }";
   var code5 = "for (var i : Number = 0; i < 3; i++) { }";
   var code6 = "for each (var i : Number in [1, 3, 5, 7]) { }";
+  var code7 = "for (let i : Number = 0; i < 3; i++) { }";
+  var code8 = "let something : Number = 3;";
+  var code9 = "for each (let i : Number in [1, 3, 5, 7]) { }";
+  var code10 = "for (var i : String in { 'a': false }) { }";
+  var code11 = "for (let i : String in { 'a': false }) { }";
   TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code1, {});
   TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code2, {});
   TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code3, {});
   TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code4, {});
   TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code5, {});
+  TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code6, { moz: true });
+  TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code7, { moz: true });
+  TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code8, { moz: true });
+  TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code9, { moz: true });
+  TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code10, {});
+  TestRun(test).addError(1, "Type annotations are not available in standard ECMA script (use es4type option).").test(code11, { moz: true });
   test.done();
 }
 

@@ -3590,6 +3590,14 @@ var JSHINT = (function() {
         lone = true;
       }
 
+      if (state.tokens.next.id === ":") {
+        if (!state.option.es4type) {
+          error("E060");
+        }
+        advance(":");
+        typeannotation();
+      }
+
       if (!prefix && isConst && state.tokens.next.id !== "=") {
         warning("E012", state.tokens.curr, state.tokens.curr.value);
       }
